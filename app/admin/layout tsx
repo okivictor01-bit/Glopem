@@ -1,85 +1,10 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabaseClient";
-import Link from "next/link";
-
+// Deliberately minimal. Auth checking lives in each page via <AdminGuard>
+// instead of here — nested client layouts were unreliable with the
+// Cloudflare adapter, so each page guards itself directly.
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [checking, setChecking] = useState(true);
-  const [authed, setAuthed] = useState(false);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    async function checkSession() {
-      const { data } = await supabase.auth.getSession();
-      if (!isMounted) return;
-
-      const hasSession = !!data.session;
-      setAuthed(hasSession);
-      setChecking(false);
-
-      if (!hasSession && pathname !== "/admin/login") {
-        router.push("/admin/login");
-      }
-    }
-
-    checkSession();
-
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setAuthed(!!session);
-      if (!session && pathname !== "/admin/login") {
-        router.push("/admin/login");
-      }
-    });
-
-    return () => {
-      isMounted = false;
-      listener.subscription.unsubscribe();
-    };
-  }, [pathname, router]);
-
-  async function handleLogout() {
-    await supabase.auth.signOut();
-    router.push("/admin/login");
-  }
-
-  // Login page renders on its own, no gate/chrome needed
-  if (pathname === "/admin/login") {
-    return <div className="max-w-5xl mx-auto px-4 py-8">{children}</div>;
-  }
-
-  if (checking) {
-    return (
-      <div className="max-w-5xl mx-auto px-4 py-8">
-        <p className="text-gray-500">Checking access…</p>
-      </div>
-    );
-  }
-
-  if (!authed) {
-    // Redirect is in flight; render nothing to avoid flashing protected content
-    return null;
-  }
-
-  return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-6 border-b pb-4">
-        <Link href="/admin" className="font-semibold">
-          Admin
-        </Link>
-        <button onClick={handleLogout} className="text-sm underline text-gray-600">
-          Log out
-        </button>
-      </div>
-      {children}
-    </div>
-  );
+  return <div className="max-w-5xl mx-auto px-4 py-8">{children}</div>;
 }
