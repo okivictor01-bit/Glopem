@@ -1,6 +1,9 @@
 import { supabase } from "@/lib/supabaseClient";
 import { notFound } from "next/navigation";
 
+// Cloudflare Pages requires dynamic routes to run on the Edge Runtime.
+export const runtime = "edge";
+
 export default async function DepartmentPage({
   params,
 }: {
