@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import Link from "next/link";
+import AdminGuard from "@/components/AdminGuard";
 
 export default function AdminDashboard() {
   const [counts, setCounts] = useState({
@@ -42,31 +43,33 @@ export default function AdminDashboard() {
   }, []);
 
   return (
-    <div className="grid gap-6">
-      <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+    <AdminGuard>
+      <div className="grid gap-6">
+        <h1 className="text-2xl font-bold">Admin Dashboard</h1>
 
-      {loading ? (
-        <p className="text-gray-500">Loading…</p>
-      ) : (
-        <div className="grid grid-cols-3 gap-4">
-          <StatCard label="New Submissions" value={counts.submissions} />
-          <StatCard label="Successful Donations" value={counts.donations} />
-          <StatCard label="Upcoming Events" value={counts.events} />
-        </div>
-      )}
+        {loading ? (
+          <p className="text-gray-500">Loading…</p>
+        ) : (
+          <div className="grid grid-cols-3 gap-4">
+            <StatCard label="New Submissions" value={counts.submissions} />
+            <StatCard label="Successful Donations" value={counts.donations} />
+            <StatCard label="Upcoming Events" value={counts.events} />
+          </div>
+        )}
 
-      <nav className="grid gap-2">
-        <Link href="/admin/content" className="underline">
-          Manage Content (sermons, events, announcements, testimonies)
-        </Link>
-        <Link href="/admin/submissions" className="underline">
-          View Form Submissions
-        </Link>
-        <Link href="/admin/donations" className="underline">
-          View Donations
-        </Link>
-      </nav>
-    </div>
+        <nav className="grid gap-2">
+          <Link href="/admin/content" className="underline">
+            Manage Content (sermons, events, announcements, testimonies)
+          </Link>
+          <Link href="/admin/submissions" className="underline">
+            View Form Submissions
+          </Link>
+          <Link href="/admin/donations" className="underline">
+            View Donations
+          </Link>
+        </nav>
+      </div>
+    </AdminGuard>
   );
 }
 
