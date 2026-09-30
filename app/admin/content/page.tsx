@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import AdminGuard from "@/components/AdminGuard";
 
 type ContentType = "sermon" | "event" | "announcement" | "testimony";
 
@@ -49,6 +50,7 @@ export default function AdminContentPage() {
   }
 
   return (
+    <AdminGuard>
     <div className="grid gap-8">
       <h1 className="text-2xl font-bold">Manage Content</h1>
 
@@ -123,5 +125,6 @@ export default function AdminContentPage() {
         ))}
       </div>
     </div>
+    </AdminGuard>
   );
 }
