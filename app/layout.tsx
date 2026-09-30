@@ -7,6 +7,9 @@ import churchConfig from "@/church.config";
 export const metadata = {
   title: churchConfig.name,
   description: churchConfig.tagline,
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
