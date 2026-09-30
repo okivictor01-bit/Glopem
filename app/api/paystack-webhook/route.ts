@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+
+// Cloudflare Pages requires dynamic routes to run on the Edge Runtime,
+// which does NOT support Node's built-in "crypto" module — only the
+// standard Web Crypto API (crypto.subtle). The signature check below
+// uses Web Crypto so this works correctly on Cloudflare.
+export const runtime = "edge";
 
 // Paystack sends events (e.g. charge.success) to this endpoint.
 // Configure this URL in your Paystack dashboard:
@@ -10,16 +15,41 @@ import { supabaseAdmin } from "@/lib/supabaseAdmin";
 // The frontend "callback" in GiveButton.tsx is NOT sufficient on its own —
 // it can be spoofed by anyone. This route is the actual source of truth.
 
+async function verifySignature(rawBody: string, signature: string | null, secret: string) {
+  if (!signature) return false;
+
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-512" },
+    false,
+    ["sign"]
+  );
+
+  const signatureBuffer = await crypto.subtle.sign(
+    "HMAC",
+    key,
+    new TextEncoder().encode(rawBody)
+  );
+
+  const expectedSignature = Array.from(new Uint8Array(signatureBuffer))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+
+  return expectedSignature === signature;
+}
+
 export async function POST(req: NextRequest) {
   const rawBody = await req.text();
   const signature = req.headers.get("x-paystack-signature");
 
-  const expectedSignature = crypto
-    .createHmac("sha512", process.env.PAYSTACK_SECRET_KEY!)
-    .update(rawBody)
-    .digest("hex");
+  const isValid = await verifySignature(
+    rawBody,
+    signature,
+    process.env.PAYSTACK_SECRET_KEY!
+  );
 
-  if (signature !== expectedSignature) {
+  if (!isValid) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
 
