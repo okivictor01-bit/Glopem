@@ -6,7 +6,7 @@ export default function Navbar() {
     <header className="border-b">
       <div className="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
         <Link href="/" className="font-bold text-lg">
-          {churchConfig.name}
+          {churchConfig.shortName}
         </Link>
         <nav className="flex gap-4 text-sm">
           <Link href="/about">About</Link>
