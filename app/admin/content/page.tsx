@@ -15,6 +15,7 @@ export default function AdminContentPage() {
   const [location, setLocation] = useState("");
   const [speaker, setSpeaker] = useState("");
   const [items, setItems] = useState<any[]>([]);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   async function loadItems() {
     const { data } = await supabase
@@ -46,6 +47,16 @@ export default function AdminContentPage() {
     setEventDate("");
     setLocation("");
     setSpeaker("");
+    loadItems();
+  }
+
+  async function handleDelete(id: string, title: string) {
+    const confirmed = window.confirm(`Delete "${title}"? This cannot be undone.`);
+    if (!confirmed) return;
+
+    setDeletingId(id);
+    await supabase.from("content_items").delete().eq("id", id);
+    setDeletingId(null);
     loadItems();
   }
 
@@ -115,12 +126,21 @@ export default function AdminContentPage() {
 
       <div className="grid gap-2">
         {items.map((item) => (
-          <div key={item.id} className="border rounded p-3 text-sm flex justify-between">
+          <div key={item.id} className="border rounded p-3 text-sm flex justify-between items-center">
             <span>
               <span className="text-xs uppercase text-gray-400 mr-2">{item.type}</span>
               {item.title}
             </span>
-            <span className="text-gray-400">{item.status}</span>
+            <div className="flex items-center gap-3">
+              <span className="text-gray-400">{item.status}</span>
+              <button
+                onClick={() => handleDelete(item.id, item.title)}
+                disabled={deletingId === item.id}
+                className="text-red-600 text-xs underline disabled:opacity-50"
+              >
+                {deletingId === item.id ? "Deleting…" : "Delete"}
+              </button>
+            </div>
           </div>
         ))}
       </div>
