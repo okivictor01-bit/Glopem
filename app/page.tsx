@@ -55,6 +55,7 @@ export default function HomePage() {
           <QuickCard href="/contact" title="Prayer Request" subtitle="We'll pray with you" />
           <QuickCard href="/events" title="Upcoming Events" subtitle="See what's happening" />
           <QuickCard href="/contact#new-here" title="New Here?" subtitle="Plan your first visit" />
+          <QuickCard href="/departments" title="Departments" subtitle="Find where to serve" />
           <QuickCard href="/about" title="About GLOPEM" subtitle="Our story & beliefs" />
         </div>
       </section>
