@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ink: #15213f;
+  --page-bg: #f7f8fb;
+}
+
 body {
-  color: #1a1a1a;
+  color: var(--ink);
+  background-color: var(--page-bg);
+  font-family: var(--font-work-sans), sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-fraunces), serif;
+  letter-spacing: -0.01em;
 }
