@@ -43,13 +43,6 @@ const churchConfig = {
     reference: "Hebrews 13:8",
   },
 
-  // Stat counters shown in the hero section. Replace with GLOPEM's real numbers.
-  stats: [
-    { label: "Years of Ministry", value: "X+" },
-    { label: "Departments", value: "X" },
-    { label: "Members", value: "X+" },
-  ],
-
   // Leadership spotlight — placeholder until a name/photo is provided.
   pastor: {
     name: "Pastor's Name",
