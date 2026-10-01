@@ -6,12 +6,10 @@
 const churchConfig = {
   name: "Glorious Pentecostal Evangelistic Ministry (GLOPEM)",
   shortName: "GLOPEM",
-  tagline: "A Place to Belong, A Place to Grow", // update with GLOPEM's actual motto if there is one
+  tagline: "A Place to Belong, A Place to Grow",
   logoPath: "/logo.png",
   address: "Off Elder Komolafe Street, Ijo Mimo, Ijoka Road, Akure, Ondo State",
 
-  // Sunday services rotate by week of the month, so each is listed separately
-  // rather than as a single repeating "Sunday service" entry.
   serviceTimes: [
     { label: "Tuesday Bible Study", time: "5:00 PM - 7:00 PM" },
     { label: "Thursday Miracle Hour", time: "5:00 PM - 7:00 PM" },
@@ -21,7 +19,7 @@ const churchConfig = {
     { label: "4th Sunday — Power Sunday", time: "8:00 AM - 12:00 PM" },
   ],
 
-  whatsappNumber: "2348035607949", // converted from 08035607949 to international format
+  whatsappNumber: "2348035607949",
 
   socialLinks: {
     facebook: "https://www.facebook.com/glopem.church",
@@ -39,9 +37,29 @@ const churchConfig = {
     "Thanksgiving",
   ],
 
+  // Hero section scripture — shown large on the homepage banner.
+  heroVerse: {
+    text: "Jesus Christ the same yesterday, and today, and forever.",
+    reference: "Hebrews 13:8",
+  },
+
+  // Stat counters shown in the hero section. Replace with GLOPEM's real numbers.
+  stats: [
+    { label: "Years of Ministry", value: "X+" },
+    { label: "Departments", value: "X" },
+    { label: "Members", value: "X+" },
+  ],
+
+  // Leadership spotlight — placeholder until a name/photo is provided.
+  pastor: {
+    name: "Pastor's Name",
+    title: "Senior Pastor",
+    photoPath: "", // add a photo path (e.g. /pastor.jpg) once available
+  },
+
   theme: {
-    primaryColor: "#1E3A8A", // blue, from the logo's globe
-    secondaryColor: "#FACC15", // yellow, from the "GLOPEM" text
+    primaryColor: "#1E3A8A",
+    secondaryColor: "#FACC15",
   },
 };
 
