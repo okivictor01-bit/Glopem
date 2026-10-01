@@ -56,12 +56,12 @@ export default function ContentList({
     return <p className="text-sm text-gray-500">Nothing here yet.</p>;
 
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-5">
       {items.map((item) => (
-        <div key={item.id} className="border rounded-lg p-4 shadow-sm">
-          <h3 className="font-semibold text-lg">{item.title}</h3>
+        <div key={item.id} className="pl-4 border-l-2 border-gray-200">
+          <h3 className="font-serif text-lg">{item.title}</h3>
           {item.speaker && (
-            <p className="text-sm text-gray-500">Speaker: {item.speaker}</p>
+            <p className="text-sm text-gray-500">{item.speaker}</p>
           )}
           {item.event_date && (
             <p className="text-sm text-gray-500">
@@ -69,7 +69,7 @@ export default function ContentList({
             </p>
           )}
           {item.location && (
-            <p className="text-sm text-gray-500">Location: {item.location}</p>
+            <p className="text-sm text-gray-500">{item.location}</p>
           )}
           {item.description && (
             <p className="mt-2 text-gray-700">{item.description}</p>
@@ -81,7 +81,7 @@ export default function ContentList({
               rel="noopener noreferrer"
               className="inline-block mt-2 text-sm font-medium underline"
             >
-              {type === "sermon" ? "Watch / Listen →" : "Learn more →"}
+              {type === "sermon" ? "Watch or listen" : "Learn more"}
             </a>
           )}
         </div>
