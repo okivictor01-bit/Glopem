@@ -78,11 +78,7 @@ export default function HomePage() {
         style={{ backgroundColor: `${churchConfig.theme.secondaryColor}20` }}
       >
         <h2 className="text-xl font-semibold mb-2">Word for Today</h2>
-        <p className="text-gray-700">
-          Replace this block with a short daily/weekly devotional thought, or
-          a quote from the most recent sermon — a nice way to keep the
-          homepage feeling alive between updates.
-        </p>
+        <ContentList type="devotional" limit={1} />
       </section>
 
       {/* SERMON SPOTLIGHT */}
