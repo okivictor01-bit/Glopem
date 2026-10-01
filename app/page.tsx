@@ -6,34 +6,31 @@ export default function HomePage() {
   return (
     <div className="grid gap-16">
       {/* HERO */}
-      <section
-        className="-mx-4 -mt-8 px-4 py-16 text-center text-white"
-        style={{
-          background: `linear-gradient(135deg, ${churchConfig.theme.primaryColor}, #0f1f4d)`,
-        }}
-      >
-        <p className="italic text-lg max-w-xl mx-auto">
-          “{churchConfig.heroVerse.text}”
-        </p>
-        <p className="text-sm text-white/70 mt-1">— {churchConfig.heroVerse.reference}</p>
-
-        <h1 className="text-4xl font-bold mt-6">{churchConfig.name}</h1>
-        <p className="text-lg text-white/80 mt-2">{churchConfig.tagline}</p>
-
-        <div className="flex gap-3 justify-center mt-6">
-          <Link
-            href="/contact#new-here"
-            className="bg-white text-black px-5 py-2 rounded font-medium"
-          >
-            Plan Your Visit
-          </Link>
-          <Link
-            href="/give"
-            className="px-5 py-2 rounded font-medium text-black"
-            style={{ backgroundColor: churchConfig.theme.secondaryColor }}
-          >
-            Give Online
-          </Link>
+      <section className="-mx-4 -mt-8">
+        <img
+          src="/hero.jpg"
+          alt={`${churchConfig.name} — ${churchConfig.heroVerse.text}`}
+          className="w-full h-auto"
+        />
+        <div
+          className="px-4 py-8 text-center"
+          style={{ backgroundColor: churchConfig.theme.primaryColor }}
+        >
+          <div className="flex gap-3 justify-center">
+            <Link
+              href="/contact#new-here"
+              className="bg-white text-black px-5 py-2 rounded font-medium"
+            >
+              Plan Your Visit
+            </Link>
+            <Link
+              href="/give"
+              className="px-5 py-2 rounded font-medium text-black"
+              style={{ backgroundColor: churchConfig.theme.secondaryColor }}
+            >
+              Give Online
+            </Link>
+          </div>
         </div>
       </section>
 
