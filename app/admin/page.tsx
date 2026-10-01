@@ -61,6 +61,9 @@ export default function AdminDashboard() {
           <Link href="/admin/content" className="underline">
             Manage Content (sermons, events, announcements, testimonies)
           </Link>
+          <Link href="/admin/departments" className="underline">
+            Manage Departments
+          </Link>
           <Link href="/admin/submissions" className="underline">
             View Form Submissions
           </Link>
