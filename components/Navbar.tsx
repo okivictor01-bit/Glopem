@@ -17,6 +17,7 @@ export default function Navbar() {
           <Link href="/about">About</Link>
           <Link href="/sermons">Sermons</Link>
           <Link href="/events">Events</Link>
+          <Link href="/departments">Departments</Link>
           <Link href="/give">Give</Link>
           <Link href="/contact">Contact</Link>
         </nav>
