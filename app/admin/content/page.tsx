@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import AdminGuard from "@/components/AdminGuard";
 
-type ContentType = "sermon" | "event" | "announcement" | "testimony";
+type ContentType = "sermon" | "event" | "announcement" | "testimony" | "devotional";
 
 export default function AdminContentPage() {
   const [type, setType] = useState<ContentType>("sermon");
@@ -75,6 +75,7 @@ export default function AdminContentPage() {
           <option value="event">Event</option>
           <option value="announcement">Announcement</option>
           <option value="testimony">Testimony</option>
+          <option value="devotional">Word for Today (Devotional)</option>
         </select>
         <input
           className="border rounded px-3 py-2"
