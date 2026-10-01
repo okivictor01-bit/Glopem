@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
-type ContentType = "sermon" | "event" | "announcement" | "testimony";
+type ContentType = "sermon" | "event" | "announcement" | "testimony" | "devotional";
 
 interface ContentItem {
   id: string;
