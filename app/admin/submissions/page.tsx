@@ -7,18 +7,30 @@ import AdminGuard from "@/components/AdminGuard";
 export default function SubmissionsPage() {
   const [submissions, setSubmissions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  async function load() {
+    const { data } = await supabase
+      .from("form_submissions")
+      .select("*")
+      .order("created_at", { ascending: false });
+    setSubmissions(data ?? []);
+    setLoading(false);
+  }
 
   useEffect(() => {
-    async function load() {
-      const { data } = await supabase
-        .from("form_submissions")
-        .select("*")
-        .order("created_at", { ascending: false });
-      setSubmissions(data ?? []);
-      setLoading(false);
-    }
     load();
   }, []);
+
+  async function handleDelete(id: string) {
+    const confirmed = window.confirm("Delete this submission? This cannot be undone.");
+    if (!confirmed) return;
+
+    setDeletingId(id);
+    await supabase.from("form_submissions").delete().eq("id", id);
+    setDeletingId(null);
+    load();
+  }
 
   return (
     <AdminGuard>
@@ -33,7 +45,16 @@ export default function SubmissionsPage() {
             )}
             {submissions.map((s) => (
               <div key={s.id} className="border rounded p-4">
-                <p className="text-xs uppercase text-gray-400">{s.form_type}</p>
+                <div className="flex justify-between items-start">
+                  <p className="text-xs uppercase text-gray-400">{s.form_type}</p>
+                  <button
+                    onClick={() => handleDelete(s.id)}
+                    disabled={deletingId === s.id}
+                    className="text-red-600 text-xs underline disabled:opacity-50"
+                  >
+                    {deletingId === s.id ? "Deleting…" : "Delete"}
+                  </button>
+                </div>
                 <p className="font-medium">
                   {s.is_anonymous ? "Anonymous" : s.full_name ?? "—"}
                 </p>
