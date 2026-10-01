@@ -35,15 +35,6 @@ export default function HomePage() {
             Give Online
           </Link>
         </div>
-
-        <div className="flex justify-center gap-10 mt-10">
-          {churchConfig.stats.map((s) => (
-            <div key={s.label}>
-              <p className="text-3xl font-bold">{s.value}</p>
-              <p className="text-sm text-white/70">{s.label}</p>
-            </div>
-          ))}
-        </div>
       </section>
 
       {/* QUICK ACTIONS */}
