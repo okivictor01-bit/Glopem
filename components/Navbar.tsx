@@ -11,7 +11,7 @@ export default function Navbar() {
             alt={`${churchConfig.shortName} logo`}
             className="h-10 w-auto"
           />
-          <span className="font-bold text-lg">{churchConfig.shortName}</span>
+          <span className="font-serif text-lg">{churchConfig.shortName}</span>
         </Link>
         <nav className="flex gap-4 text-sm">
           <Link href="/about">About</Link>
