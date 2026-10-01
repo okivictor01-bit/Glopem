@@ -37,22 +37,20 @@ const churchConfig = {
     "Thanksgiving",
   ],
 
-  // Hero section scripture — shown large on the homepage banner.
   heroVerse: {
     text: "Jesus Christ the same yesterday, and today, and forever.",
     reference: "Hebrews 13:8",
   },
 
-  // Leadership spotlight — placeholder until a name/photo is provided.
   pastor: {
     name: "Pastor's Name",
     title: "Senior Pastor",
-    photoPath: "", // add a photo path (e.g. /pastor.jpg) once available
+    photoPath: "",
   },
 
   theme: {
-    primaryColor: "#1E3A8A",
-    secondaryColor: "#FACC15",
+    primaryColor: "#102A54", // deep indigo
+    secondaryColor: "#D4A017", // warm gold
   },
 };
 
